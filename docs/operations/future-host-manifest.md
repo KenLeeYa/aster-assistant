@@ -2,6 +2,28 @@
 
 No item in this document has been installed for the future host. Record exact versions, hashes, license terms, and provenance when that host exists. Lock only versions that pass the target-host acceptance tests.
 
+## Version and source policy
+
+The repository locks application dependencies in `uv.lock`, `pnpm-lock.yaml`, and the Rust/Android lockfiles. Host packages are deliberately unpinned until the target machine, Linux distribution, and driver stack are known. At setup, record the installed version, upstream release URL, package checksum or digest, license URL and redistribution terms, and host acceptance result for **each** selected component and model. Do not treat an example version as an approved host version. Optional components remain disabled unless selected and accepted separately.
+
+Official upstream sources and license entry points:
+
+| Component | Official source and licensing entry point | Selection |
+| --- | --- | --- |
+| Windows 11 / WSL2 | [Microsoft WSL](https://learn.microsoft.com/windows/wsl/install), [Microsoft software terms](https://www.microsoft.com/useterms/) | Required host; use the host's licensed Windows version |
+| Linux distribution | Record the selected distribution's official release and license pages | Required inside WSL; distribution undecided |
+| Python / uv | [Python releases](https://www.python.org/downloads/), [Python license](https://docs.python.org/3/license.html), [uv releases and license](https://github.com/astral-sh/uv) | Required; Python range follows `pyproject.toml` |
+| PostgreSQL / pgvector | [PostgreSQL releases and license](https://www.postgresql.org/about/licence/), [pgvector releases and license](https://github.com/pgvector/pgvector) | Required; choose compatible major versions together |
+| Node.js / pnpm | [Node.js releases and license](https://github.com/nodejs/node), [pnpm releases and license](https://github.com/pnpm/pnpm) | Required; check `.nvmrc` and `packageManager` |
+| Rust / Tauri | [Rust releases and license](https://github.com/rust-lang/rust), [Tauri prerequisites and license](https://v2.tauri.app/start/prerequisites/) | Required only when building desktop package |
+| Ollama | [Ollama releases and license](https://github.com/ollama/ollama) | Initial local inference choice; one runtime instance |
+| Colibri | [Colibri releases and license](https://github.com/JustVugg/colibri) | Optional alternative provider; check upstream license before use |
+| faster-whisper / whisper.cpp | [faster-whisper](https://github.com/SYSTRAN/faster-whisper), [whisper.cpp](https://github.com/ggml-org/whisper.cpp) | Optional STT alternatives; select at most one initially |
+| sherpa-onnx / Pipecat | [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx), [Pipecat](https://github.com/pipecat-ai/pipecat) | Optional speech components |
+| Android SDK | [Android SDK](https://developer.android.com/studio), [Android SDK license information](https://developer.android.com/studio/terms) | Optional development host only |
+
+Model weights have their own licenses, which can differ from a runtime's license. Review the exact model revision and license before download or redistribution.
+
 | Need | Component | OS | Purpose and source | Gate |
 | --- | --- | --- | --- | --- |
 | Required | Windows 11 + WSL2 and a supported Linux distribution | Windows/WSL | Host and Linux runtime; Microsoft WSL documentation | Verify virtualization, updates, memory, network mode, sleep behavior |

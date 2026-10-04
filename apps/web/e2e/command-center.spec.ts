@@ -5,7 +5,7 @@ test("shows the current credential-free milestone and local Core", async ({ page
 
   await expect(page.getByRole("heading", { name: "KY-JARVIS" })).toBeVisible();
   await expect(page.getByText("麥克風未啟用", { exact: true })).toBeVisible();
-  await expect(page.getByText("核心在線", { exact: true })).toBeVisible();
+  await expect(page.getByText("核心服務需要處理", { exact: true })).toBeVisible();
   await expect(page.getByText("資料已同步；外部寫入仍需核准", { exact: true })).toBeVisible();
   await expect(page.getByText("Phase 0–13", { exact: true })).toBeVisible();
   await expect(page.getByText("安全可完成範圍", { exact: true })).toBeVisible();
