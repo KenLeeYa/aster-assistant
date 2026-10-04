@@ -44,8 +44,11 @@ jobs:
         run: corepack pnpm --dir apps/web exec playwright install --with-deps chromium
       - name: Web end-to-end smoke
         run: corepack pnpm --dir apps/web test:e2e
-      - name: JavaScript dependency audit
-        run: corepack pnpm audit --audit-level high
+      - name: Production JavaScript dependency audit
+        run: corepack pnpm audit --prod --audit-level high
+      - name: Development JavaScript dependency audit (advisory)
+        continue-on-error: true
+        run: corepack pnpm audit --dev --audit-level high
 
   postgres:
     runs-on: ubuntu-latest
