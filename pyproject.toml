@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling==1.28.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ky-jarvis"
+version = "0.1.0"
+description = "Local-first governed personal intelligence and work orchestration"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+license = { text = "Proprietary" }
+dependencies = [
+  "cryptography==50.0.1",
+  "fastapi==0.141.1",
+  "httpx==0.28.1",
+  "pydantic==2.13.5",
+  "pydantic-settings==2.15.0",
+  "pyyaml==6.0.3",
+  "uvicorn[standard]==0.52.4",
+  "webauthn==3.0.0",
+]
+
+[project.optional-dependencies]
+database = [
+  "alembic==1.19.1",
+  "pgvector==0.5.0",
+  "psycopg[binary,pool]==3.3.4",
+  "sqlalchemy[asyncio]==2.0.52",
+]
+agents = [
+  "apscheduler==3.11.3",
+  "keyring==25.7.0",
+  "langgraph==1.2.11",
+  "langgraph-checkpoint-postgres==3.1.2",
+  "mcp==2.1.1",
+  "jsonschema==4.26.0",
+]
+voice = [
+  "faster-whisper==1.2.1",
+]
+
+[dependency-groups]
+dev = [
+  "mypy==2.3.1",
+  "pytest==9.1.1",
+  "pytest-asyncio==1.4.0",
+  "ruff==0.16.5",
+  "types-jsonschema==4.26.0.20260518",
+  "types-PyYAML==6.0.12.20260815",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["services/core-api/src/ky_jarvis_core"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["services/core-api/tests", "tests/unit"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "S"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"services/core-api/alembic/versions/*.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["ky_jarvis_core"]
+mypy_path = "services/core-api/src"

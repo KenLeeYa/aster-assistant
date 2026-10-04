@@ -1,0 +1,10 @@
+deployment_mode: local-only
+host: 127.0.0.1
+enable_lan_access: false
+enable_remote_gateway: false
+remote_tls_identity: null
+enable_push_notifications: false
+enable_offline_command_queue: false
+
+# private-remote or hybrid-gateway requires explicit LAN access, the remote gateway flag,
+# and a non-empty TLS server identity. Router/firewall broadening is never automatic.

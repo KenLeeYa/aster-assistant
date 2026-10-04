@@ -1,0 +1,9 @@
+enabled: false
+assistant_role_enabled: false
+minimum_api_level: 29
+target_api_level: 37
+pairing_ttl_seconds: 300
+access_token_ttl_seconds: 600
+raw_audio_retention: false
+lock_screen_detail: redacted
+high_risk_biometric_policy: strong_when_available

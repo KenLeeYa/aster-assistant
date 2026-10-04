@@ -1,0 +1,17 @@
+automations:
+  - id: morning-brief
+    enabled: false
+    owner: local-user
+    schedule: "0 8 * * *"
+    timezone: Asia/Taipei
+    inputs: [demo.local-note]
+    tools: [demo.note.read]
+    permission_level: R0_READ_LOCAL
+    approval_behavior: read-only
+    retry_policy:
+      attempts: 0
+      backoff_seconds: 60
+    maximum_duration_seconds: 60
+    output_destination: local-preview
+    failure_notification: local-status
+    audit_link: true

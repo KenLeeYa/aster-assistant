@@ -1,0 +1,9 @@
+enable_openai_realtime: false
+realtime_max_session_seconds: 600
+realtime_max_concurrent_sessions: 1
+realtime_daily_soft_limit_units: 0
+realtime_daily_hard_limit_units: 0
+
+# Zero hard budget keeps client-secret issuance fail-closed even if the feature flag is changed.
+# A reusable provider API key belongs only in the backend SecretStore/environment gate.
+# Android accepts only an ephemeral client secret; local_chained remains the credential-free fallback.

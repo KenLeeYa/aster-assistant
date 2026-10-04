@@ -1,0 +1,17 @@
+default_policy: deny
+rules:
+  - action: read_approved_local_project_data
+    risk_level: R0_READ_LOCAL
+    behavior: automatic_with_audit
+  - action: generate_plan_or_draft
+    risk_level: R0_READ_LOCAL
+    behavior: automatic
+  - action: create_or_modify_external_data
+    risk_level: R3_MODIFY
+    behavior: approval_required
+  - action: delete_or_execute
+    risk_level: R4_DELETE_OR_EXECUTE
+    behavior: two_step_approval_with_recovery_plan
+  - action: financial_transaction
+    risk_level: R5_FINANCIAL_OR_PRIVILEGED
+    behavior: never_autonomous

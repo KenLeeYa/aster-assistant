@@ -1,0 +1,14 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated dependency and build trees are recreated from audited lockfiles"
+paths = [
+  '''(^|/)\.venv/''',
+  '''(^|/)node_modules/''',
+  '''(^|/)\.next/''',
+  '''(^|/)apps/android/\.gradle/''',
+  '''(^|/)apps/android/app/build/''',
+  '''(^|/)apps/desktop/src-tauri/target/''',
+  '''(^|/)reports/scans/''',
+]

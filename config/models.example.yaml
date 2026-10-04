@@ -1,0 +1,8 @@
+provider: ollama
+provider_enabled: false
+base_url: http://127.0.0.1:11434
+chat_model: null
+embedding_model: null
+max_loaded_chat_models: 1
+auto_download: false
+maximum_download_without_approval_gb: 6

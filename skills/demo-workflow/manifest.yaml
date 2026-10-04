@@ -1,0 +1,13 @@
+name: demo-workflow
+version: 0.1.0
+description: Synthetic example of a governed draft workflow.
+enabled_by_default: false
+voice_intents:
+  - name: review-draft
+    description: Review a synthetic draft without side effects.
+    risk_level: R0_READ_LOCAL
+    requires_approval: false
+  - name: execute-reviewed-draft
+    description: Request approval for a synthetic draft action.
+    risk_level: R3_MODIFY
+    requires_approval: true

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "KY-JARVIS",
+  "version": "0.1.0",
+  "identifier": "tw.ky.jarvis",
+  "build": {
+    "beforeDevCommand": "corepack pnpm@11.24.0 --dir ../web dev",
+    "devUrl": "http://localhost:3000",
+    "beforeBuildCommand": "corepack pnpm@11.24.0 --dir ../web build",
+    "frontendDist": "../../web/out"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "KY-JARVIS",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 960,
+        "minHeight": 640,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self' customprotocol: asset:; connect-src 'self' http://127.0.0.1:8765 ws://127.0.0.1:8765; img-src 'self' asset: data:; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ]
+  }
+}

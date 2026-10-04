@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">KY-JARVIS</string>
+    <string name="assistant_name">KY-JARVIS 助理</string>
+    <string name="push_to_talk">按住說話</string>
+    <string name="shortcut_ptt_short">按住說話</string>
+    <string name="shortcut_ptt_long">開啟 KY-JARVIS 按住說話</string>
+    <string name="widget_title">KY-JARVIS</string>
+    <string name="widget_status">點一下開啟 · 麥克風關閉</string>
+    <string name="assistant_session_message">KY-JARVIS 助理\n麥克風尚未開啟；請使用下方按鈕。</string>
+    <string name="open_push_to_talk">開啟按住說話</string>
+</resources>

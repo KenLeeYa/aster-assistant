@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9 # v7
+        with:
+          enable-cache: true
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+      - name: Install locked dependencies
+        run: |
+          corepack enable
+          uv sync --all-extras --group dev --locked
+          corepack pnpm install --frozen-lockfile
+      - name: Python quality and tests
+        run: |
+          uv run ruff format --check .
+          uv run ruff check .
+          uv run mypy
+          uv run pytest
+      - name: Web quality and production build
+        run: |
+          corepack pnpm --dir apps/web lint
+          corepack pnpm --dir apps/web typecheck
+          corepack pnpm --dir apps/web build
+      - name: Install Playwright Chromium
+        run: corepack pnpm --dir apps/web exec playwright install --with-deps chromium
+      - name: Web end-to-end smoke
+        run: corepack pnpm --dir apps/web test:e2e
+      - name: JavaScript dependency audit
+        run: corepack pnpm audit --audit-level high
+
+  postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.2-pg18-bookworm@sha256:2ac2c62ac8f030b414b19ea633a6d1d4d37c03abe52ce91887a4e5b4fbb5c73c
+        env:
+          POSTGRES_DB: ky_jarvis
+          POSTGRES_USER: ky_jarvis
+          POSTGRES_PASSWORD: ci-only-password
+        ports:
+          - 55433:5432
+        options: >-
+          --health-cmd "pg_isready -U ky_jarvis -d ky_jarvis"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      KY_JARVIS_DATABASE_URL: postgresql+psycopg://ky_jarvis:ci-only-password@127.0.0.1:55433/ky_jarvis
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9 # v7
+      - run: uv sync --all-extras --group dev --locked
+      - name: Upgrade, inspect, and downgrade database
+        run: |
+          uv run alembic upgrade head
+          uv run pytest services/core-api/tests/test_database_schema.py -q
+          uv run pytest services/core-api/tests/test_agent_postgres.py -q
+          uv run alembic downgrade base
+
+  secrets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@dcedce43c6f43de0b836d1fe38946645c9c638dc # v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

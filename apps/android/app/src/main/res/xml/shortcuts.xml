@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_mic"
+        android:shortcutId="push_to_talk"
+        android:shortcutLongLabel="@string/shortcut_ptt_long"
+        android:shortcutShortLabel="@string/shortcut_ptt_short">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="tw.ky.jarvis.MainActivity"
+            android:targetPackage="@string/shortcut_target_package" />
+    </shortcut>
+</shortcuts>

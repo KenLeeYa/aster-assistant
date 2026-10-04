@@ -1,0 +1,39 @@
+host: 127.0.0.1
+port: 8765
+timezone: Asia/Taipei
+locale: zh-TW
+deployment_mode: local-only
+resource_profile: balanced
+ollama_base_url: http://127.0.0.1:11434
+local_model_provider: ollama
+ollama_model: null
+colibri_base_url: http://127.0.0.1:8321
+colibri_model: null
+stt_model: small
+voice_max_seconds: 30
+operator_rp_id: localhost
+operator_origin: http://localhost:3000
+allowed_web_origins:
+  - http://127.0.0.1:3000
+  - http://localhost:3000
+
+enable_voice: false
+enable_wake_word: false
+enable_google_calendar: false
+enable_gmail: false
+enable_google_drive: false
+enable_microsoft_graph: false
+enable_plane: false
+enable_n8n: false
+enable_local_files: false
+enable_windows_executor: false
+enable_mem0_adapter: false
+enable_cloud_ai: false
+enable_lan_access: false
+enable_android_app: false
+enable_android_assistant_role: false
+enable_openai_realtime: false
+enable_remote_gateway: false
+enable_push_notifications: false
+enable_offline_command_queue: false
+enable_device_key_attestation: false

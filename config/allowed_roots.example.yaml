@@ -1,0 +1,11 @@
+enabled: false
+roots:
+  - path: 'C:\VA\Input'
+    mode: read_only
+    enabled: false
+  - path: 'C:\VA\Output'
+    mode: read_write_with_approval
+    enabled: false
+  - path: '%USERPROFILE%\Downloads'
+    mode: read_only
+    enabled: false

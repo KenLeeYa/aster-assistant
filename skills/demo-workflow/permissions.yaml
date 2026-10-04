@@ -1,0 +1,9 @@
+read:
+  - demo.draft.read
+write: []
+approval_required:
+  - demo.publish
+  - demo.send
+  - demo.move
+forbidden:
+  - demo.delete

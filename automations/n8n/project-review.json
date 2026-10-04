@@ -1,0 +1,1 @@
+{"active":false,"meta":{"approvalBoundary":"KY-JARVIS central gateway","example":"synthetic"},"nodes":[{"name":"Manual review","type":"n8n-nodes-base.manualTrigger","parameters":{}}],"connections":{}}

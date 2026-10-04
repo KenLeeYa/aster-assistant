@@ -1,0 +1,5 @@
+cases:
+  - name: read-only preview
+    expected_state: preview
+  - name: consequential action waits
+    expected_state: pending_approval

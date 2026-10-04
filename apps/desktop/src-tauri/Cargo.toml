@@ -1,0 +1,20 @@
+[package]
+name = "ky-jarvis-desktop"
+version = "0.1.0"
+description = "KY-JARVIS governed local command center"
+authors = ["KY-JARVIS contributors"]
+edition = "2021"
+rust-version = "1.85"
+
+[lib]
+name = "ky_jarvis_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "=2.6.3", features = [] }
+
+[dependencies]
+tauri = { version = "=2.11.5", features = ["tray-icon"] }
+tauri-plugin-autostart = "=2.5.1"
+tauri-plugin-notification = "=2.4.0"
+tauri-plugin-single-instance = "=2.4.4"

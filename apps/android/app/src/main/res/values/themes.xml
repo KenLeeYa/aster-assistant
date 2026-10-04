@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.KYJarvis" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">#071011</item>
+        <item name="android:navigationBarColor">#071011</item>
+        <item name="android:windowBackground">#071011</item>
+    </style>
+</resources>

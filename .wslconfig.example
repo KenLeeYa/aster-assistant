@@ -1,0 +1,4 @@
+[wsl2]
+# Set memory, swap, and processors only after measuring the target host.
+# This sample deliberately does not assume the previous development machine's
+# hardware. Review before copying to %USERPROFILE%\.wslconfig.
